@@ -93,13 +93,68 @@ public class InfluxDBClient implements InitializingBean {
   }
 
   /**
+   * Write a single Point to the database.
+   * @param measurement the name of the measurement.
+   * @param tags        the Map of tags to set
+   * @param fields      the fields to set
+   * @param timeToSet the time for this point
+   */
+  public void write(String measurement, Map<String, String> tags, Map<String, Object> fields,final long timeToSet) {
+    write(measurement,tags,fields,timeToSet,TimeUnit.MILLISECONDS);
+  }
+
+  /**
+   * Write a single Point to the database.
+   * @param measurement the name of the measurement.
+   * @param tags        the Map of tags to set
+   * @param fields      the fields to set
+   * @param timeToSet the time for this point
+   * @param precisionToSet the TimeUnit
+   */
+  public void write(String measurement, Map<String, String> tags, Map<String, Object> fields,final long timeToSet, final TimeUnit precisionToSet) {
+    Point.Builder builder = Point.measurement(measurement);
+    builder.tag(tags);
+    builder.fields(fields);
+    builder.time(timeToSet,precisionToSet);
+    write(builder.build());
+  }
+
+  /**
    * Write a single Point with POJO to the database.
    *
-   * @param pojo The POJO Object with annotation {@link org.influxdb.annotation.Column} on fields to write
+   * @param pojo The POJO Object with annotation {@link org.influxdb.annotation.Measurement} on fields to write
    */
   public <T> void write(final T pojo){
     Point point = Point.measurementByPOJO(pojo.getClass()).addFieldsFromPOJO(pojo).build();
     write(point);
+  }
+
+
+  /**
+   * Write a single Point to the database.
+   * @param measurement the name of the measurement.
+   * @param tags        the Map of tags to set
+   * @param fields      the fields to set
+   * @param timeToSet the time for this point
+   */
+  public void writeUdp(String measurement, Map<String, String> tags, Map<String, Object> fields,final long timeToSet) {
+    writeUdp(measurement,tags,fields,timeToSet,TimeUnit.MILLISECONDS);
+  }
+
+  /**
+   * Write a single Point to the database.
+   * @param measurement the name of the measurement.
+   * @param tags        the Map of tags to set
+   * @param fields      the fields to set
+   * @param timeToSet the time for this point
+   * @param precisionToSet the TimeUnit
+   */
+  public void writeUdp(String measurement, Map<String, String> tags, Map<String, Object> fields,final long timeToSet, final TimeUnit precisionToSet) {
+    Point.Builder builder = Point.measurement(measurement);
+    builder.tag(tags);
+    builder.fields(fields);
+    builder.time(timeToSet,precisionToSet);
+    writeUdp(builder.build());
   }
 
   /**
@@ -133,7 +188,7 @@ public class InfluxDBClient implements InitializingBean {
   /**
    * Write a single Point to the database through UDP.
    *
-   * @param pojo The POJO Object with annotation {@link org.influxdb.annotation.Column} on fields to write
+   * @param pojo The POJO Object with annotation {@link org.influxdb.annotation.Measurement} on fields to write
    */
   public <T> void writeUdp(int udpPort,final T pojo){
     Point point = Point.measurementByPOJO(pojo.getClass()).addFieldsFromPOJO(pojo).build();
