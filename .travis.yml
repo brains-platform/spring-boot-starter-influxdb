@@ -7,4 +7,7 @@ sudo: required
 dist: trusty
 
 script:
-  - mvn package --fail-at-end
+  - mvn package --fail-at-end cobertura:cobertura
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
