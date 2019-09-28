@@ -53,7 +53,7 @@ public class InfluxDBFactoryBean implements FactoryBean<InfluxDB>,InitializingBe
 
   @Override
   public boolean isSingleton() {
-    return true;
+    return false;
   }
     
   public InfluxDBProperties getProperties(){

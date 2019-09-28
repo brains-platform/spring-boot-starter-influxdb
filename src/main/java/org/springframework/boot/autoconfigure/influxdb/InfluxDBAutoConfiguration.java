@@ -1,14 +1,13 @@
 package org.springframework.boot.autoconfigure.influxdb;
 
+import info.boruisi.platform.data.influxdb.client.InfluxDBClient;
+import info.boruisi.platform.data.influxdb.client.InfluxDBFactoryBean;
+import info.boruisi.platform.data.influxdb.config.InfluxDBProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import info.boruisi.platform.data.influxdb.client.InfluxDBClient;
-import info.boruisi.platform.data.influxdb.client.InfluxDBFactoryBean;
-import info.boruisi.platform.data.influxdb.config.InfluxDBProperties;
 
 @Configuration
 @EnableConfigurationProperties(InfluxDBProperties.class)
@@ -23,7 +22,7 @@ public class InfluxDBAutoConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
-  InfluxDBFactoryBean influxDBFactory() throws Exception{
+  InfluxDBFactoryBean influxDBFactory() {
     return new InfluxDBFactoryBean(properties);
   }
 

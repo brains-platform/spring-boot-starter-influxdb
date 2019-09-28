@@ -31,7 +31,7 @@ public class InfluxDBProperties {
   /**
    * retention policy
    */
-  private String retentionPolicy;
+  private String retentionPolicy = "autogen";
 
   /**
    * http connection timeout,Time unit second
@@ -53,11 +53,22 @@ public class InfluxDBProperties {
    */
   private boolean gzip = false;
 
+  /**
+   * Enable batching of single Point writes to speed up writes significantly. If either number of points written or
+   * flushDuration time limit is reached, a batch write is issued.
+   * Note that batch processing needs to be explicitly stopped before the application is shutdown.
+   * To do so call disableBatch().
+   */
+  private boolean enableBatch = false;
+
+  /**
+   * the number of actions to collect
+   */
   private int batchAction = 2000;
 
-    /**
-     * Time unit millisecond
-     */
+  /**
+   * the time to wait at most (milliseconds).
+   */
   private int flushDuration = 1000;
 
   /**
@@ -72,7 +83,16 @@ public class InfluxDBProperties {
    */
   private int udpPort = 8089;
 
-  private boolean enableBatch = false;
+  public InfluxDBProperties() {
+  }
+
+  public InfluxDBProperties(String url, String username, String password, String database, String retentionPolicy) {
+    this.url = url;
+    this.username = username;
+    this.password = password;
+    this.database = database;
+    this.retentionPolicy = retentionPolicy;
+  }
 
   /**
    * @return String return the url

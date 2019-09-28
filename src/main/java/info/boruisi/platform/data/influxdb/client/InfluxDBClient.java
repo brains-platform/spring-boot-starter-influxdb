@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class InfluxDBClient implements InitializingBean {
 
-  private static Logger logger = LoggerFactory.getLogger(InfluxDBClient.class);
+  private static final Logger logger = LoggerFactory.getLogger(InfluxDBClient.class);
 
   private InfluxDBFactoryBean influxDBFactory;
   private InfluxDB influxDB;
