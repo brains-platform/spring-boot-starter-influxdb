@@ -14,15 +14,20 @@
 	<description>InfluxDB starter for Spring Boot</description>
 
 	<properties>
-    <!-- Project Properties -->
+    	<!-- Project Properties -->
 		<java.version>1.8</java.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <!-- Dependency Versions -->
-    <influxdb-java.version>2.15</influxdb-java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- Dependency Versions -->
+		<influxdb-java.version>2.17</influxdb-java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.influxdb</groupId>
+			<artifactId>influxdb-java</artifactId>
+			<version>${influxdb-java.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -38,12 +43,6 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-    <dependency>
-      <groupId>org.influxdb</groupId>
-      <artifactId>influxdb-java</artifactId>
-      <version>${influxdb-java.version}</version>
-    </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
