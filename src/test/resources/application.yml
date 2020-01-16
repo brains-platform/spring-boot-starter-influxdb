@@ -1,0 +1,6 @@
+spring:
+  data:
+    influxdb:
+      database: telegraf
+      url: http://127.0.0.1:8086
+      username: admin
